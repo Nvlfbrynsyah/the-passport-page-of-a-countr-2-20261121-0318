@@ -1,0 +1,641 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Republic of Aldermere Passport</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1024px;
+        height: 1024px;
+        overflow: hidden;
+      }
+      body {
+        background: #12283a;
+        color: #16294d;
+        font-family: Arial, Helvetica, sans-serif;
+        background-image: radial-gradient(
+          circle at 50% 38%,
+          #1d3a52 0,
+          #12283a 76%
+        );
+      }
+      .caption {
+        height: 64px;
+        text-align: center;
+        color: #fff;
+        padding-top: 9px;
+      }
+      .caption .eyebrow {
+        font-size: 12px;
+        letter-spacing: 4px;
+        color: #d4a437;
+      }
+      .caption h1 {
+        font:
+          700 26px Georgia,
+          serif;
+        margin: 5px 0 0;
+      }
+      .caption:after {
+        content: "";
+        display: block;
+        width: 600px;
+        height: 2px;
+        background: #d4a437;
+        margin: 7px auto 0;
+      }
+      .book {
+        position: absolute;
+        left: 32px;
+        top: 88px;
+        width: 960px;
+        height: 684px;
+        display: flex;
+        box-shadow: 0 16px 28px #07151f;
+        border-radius: 6px;
+        overflow: hidden;
+      }
+      .page {
+        position: relative;
+        width: 480px;
+        height: 684px;
+        background: #f7f1de;
+        padding: 25px 28px;
+        border: 1px solid #d7cbaa;
+      }
+      .page:before {
+        content: "";
+        position: absolute;
+        inset: 14px;
+        border: 2px solid #b9973f;
+        outline: 1px solid #b9973f;
+        outline-offset: 3px;
+        pointer-events: none;
+      }
+      .page:after {
+        content: "SPECIMEN";
+        position: absolute;
+        z-index: 0;
+        top: 275px;
+        left: 42px;
+        color: #b9973f;
+        opacity: 0.1;
+        font: bold 64px Arial;
+        transform: rotate(-32deg);
+        pointer-events: none;
+      }
+      .left {
+        border-radius: 6px 0 0 6px;
+      }
+      .right {
+        border-radius: 0 6px 6px 0;
+      }
+      .spine {
+        width: 10px;
+        height: 684px;
+        background: linear-gradient(90deg, #c0ad7e, #655634, #d5c58d);
+        z-index: 2;
+        flex: none;
+      }
+      .content {
+        position: relative;
+        z-index: 1;
+      }
+      .arms-small {
+        display: block;
+        margin: 0 auto;
+        width: 44px;
+        height: 52px;
+      }
+      .country {
+        text-align: center;
+        font:
+          bold 21px Georgia,
+          serif;
+        letter-spacing: 2px;
+        margin-top: 1px;
+      }
+      .sub {
+        text-align: center;
+        font-size: 11px;
+        letter-spacing: 3px;
+        color: #7a1f2b;
+        margin-top: 4px;
+      }
+      .rule {
+        height: 2px;
+        background: #b9973f;
+        width: 380px;
+        margin: 9px auto 12px;
+      }
+      .identity {
+        display: flex;
+        gap: 18px;
+      }
+      .photo {
+        width: 150px;
+        height: 190px;
+        border: 2px solid #16294d;
+        background: #cfe0ea;
+        position: relative;
+        flex: none;
+      }
+      .photo svg {
+        width: 100%;
+        height: 156px;
+        display: block;
+      }
+      .flag {
+        position: absolute;
+        bottom: 8px;
+        left: 50px;
+        width: 46px;
+        height: 30px;
+        border: 1px solid #16294d;
+      }
+      .flag i {
+        display: block;
+        height: 9px;
+      }
+      .navy {
+        background: #16294d;
+      }
+      .gold {
+        background: #d4a437;
+      }
+      .burg {
+        background: #7a1f2b;
+      }
+      .flag b {
+        position: absolute;
+        color: white;
+        left: 18px;
+        top: 8px;
+        font-size: 11px;
+      }
+      .fields {
+        width: 250px;
+      }
+      .field {
+        margin-bottom: 8px;
+      }
+      .label {
+        font-size: 9px;
+        color: #6b6252;
+        letter-spacing: 1px;
+      }
+      .value {
+        font-size: 14px;
+        font-weight: bold;
+        color: #16294d;
+        margin-top: 1px;
+        white-space: nowrap;
+      }
+      .signature {
+        margin: 10px 0 0 170px;
+        width: 260px;
+      }
+      .sig {
+        font: italic 18px Georgia;
+        color: #16294d;
+        height: 25px;
+        border-bottom: 1px solid #6b6252;
+      }
+      .siglabel {
+        font-size: 9px;
+        color: #6b6252;
+        letter-spacing: 1px;
+        margin-top: 3px;
+      }
+      .mrz {
+        position: absolute;
+        bottom: 85px;
+        left: 28px;
+        width: 424px;
+        height: 48px;
+        background: #efe7cd;
+        padding: 8px 6px;
+        font: 13px monospace;
+        letter-spacing: 1px;
+        white-space: nowrap;
+        color: #16294d;
+      }
+      .right .heading {
+        text-align: center;
+        font-weight: bold;
+        font-size: 13px;
+        letter-spacing: 3px;
+        margin-top: 8px;
+      }
+      .right .rule {
+        width: 380px;
+        margin: 8px auto 7px;
+      }
+      .big-arms {
+        height: 142px;
+        text-align: center;
+      }
+      .big-arms svg {
+        height: 120px;
+        width: 220px;
+      }
+      .motto {
+        text-align: center;
+        font-size: 12px;
+        letter-spacing: 3px;
+        margin-top: -1px;
+      }
+      .stamps {
+        height: 151px;
+        position: relative;
+        margin-top: 3px;
+      }
+      .stamp {
+        position: absolute;
+        width: 200px;
+        height: 64px;
+        border: 2px dashed currentColor;
+        text-align: center;
+        padding-top: 8px;
+        font-weight: bold;
+        line-height: 21px;
+        font-size: 12px;
+      }
+      .stamp span {
+        font-size: 10px;
+      }
+      .s1 {
+        left: 8px;
+        top: 4px;
+        color: #16294d;
+        transform: rotate(-4deg);
+      }
+      .s2 {
+        right: -2px;
+        top: 12px;
+        color: #7a1f2b;
+        transform: rotate(3deg);
+      }
+      .s3 {
+        left: 133px;
+        top: 80px;
+        color: #1f4d2e;
+        transform: rotate(-2deg);
+      }
+      .visa {
+        height: 92px;
+        width: 300px;
+        margin: 0 auto;
+        background: #f0e2b8;
+        border: 1px solid #16294d;
+        text-align: center;
+        padding-top: 28px;
+        position: relative;
+        overflow: hidden;
+      }
+      .visa svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.35;
+      }
+      .visa strong,
+      .visa small {
+        position: relative;
+        z-index: 1;
+        display: block;
+      }
+      .visa strong {
+        font-size: 13px;
+      }
+      .visa small {
+        font-size: 10px;
+        margin-top: 9px;
+      }
+      .lower {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+        margin-top: 9px;
+      }
+      .mapbox {
+        text-align: center;
+        width: 190px;
+      }
+      .mapbox svg {
+        width: 170px;
+        height: 100px;
+        display: block;
+        margin: auto;
+      }
+      .maplabel,
+      .foil-label {
+        font-size: 9px;
+        color: #6b6252;
+        letter-spacing: 1px;
+      }
+      .foilbox {
+        text-align: center;
+        width: 120px;
+      }
+      .foil {
+        width: 84px;
+        height: 84px;
+        border-radius: 50%;
+        margin: 8px auto 5px;
+        background: radial-gradient(
+          circle,
+          #f8e6a5 0,
+          #c99627 55%,
+          #f5dc80 72%,
+          #a87619 100%
+        );
+        border: 2px solid #b9973f;
+        display: grid;
+        place-items: center;
+      }
+      .foil svg {
+        width: 50px;
+        height: 50px;
+      }
+      .valid {
+        text-align: center;
+        font: italic 10px Arial;
+        color: #6b6252;
+        margin-top: 9px;
+        white-space: nowrap;
+      }
+      .bottom {
+        position: absolute;
+        top: 796px;
+        left: 62px;
+        width: 900px;
+        height: 204px;
+        color: #fff;
+        text-align: center;
+      }
+      .facts {
+        height: 80px;
+        display: flex;
+        align-items: center;
+      }
+      .fact {
+        width: 300px;
+        height: 58px;
+        padding-top: 4px;
+      }
+      .fact + .fact {
+        border-left: 1px solid #b9973f;
+      }
+      .fact strong {
+        display: block;
+        color: #d4a437;
+        font-size: 22px;
+      }
+      .fact span {
+        display: block;
+        font-size: 10px;
+        letter-spacing: 2px;
+        margin-top: 5px;
+      }
+      .footer {
+        margin-top: 31px;
+        color: #9fb2c3;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="caption">
+      <div class="eyebrow">
+        AN INVENTED COUNTRY · A PASSPORT THAT ISN'T REAL
+      </div>
+      <h1>THE PASSPORT PAGE OF A COUNTRY THAT ISN'T THERE</h1>
+    </section>
+    <main class="book">
+      <section class="page left">
+        <div class="content">
+          <svg class="arms-small" viewBox="0 0 60 70">
+            <path
+              fill="#7a1f2b"
+              stroke="#b9973f"
+              stroke-width="2"
+              d="M8 12h44v25c0 14-10 22-22 28C18 59 8 51 8 37z"
+            />
+            <path fill="#16294d" d="M8 12h44v12H8z" />
+            <path
+              fill="#d4a437"
+              d="m30 16 2 5 6 1-4 4 1 6-5-3-5 3 1-6-4-4 6-1z"
+            />
+            <path
+              fill="#d4a437"
+              d="M12 44q9-9 18 0 9-9 18 0v7q-9-9-18 0-9-9-18 0z"
+            />
+          </svg>
+          <div class="country">REPUBLIC OF ALDERMERE</div>
+          <div class="sub">PASSPORT · DATA PAGE</div>
+          <div class="rule"></div>
+          <div class="identity">
+            <div class="photo">
+              <svg viewBox="0 0 150 158">
+                <path fill="#16294d" d="M25 158q3-39 35-47h30q32 8 35 47z" />
+                <path fill="white" d="m59 112 16 19 16-19 8 46H51z" />
+                <ellipse fill="#b97755" cx="75" cy="63" rx="32" ry="39" />
+                <path
+                  fill="#3c2927"
+                  d="M43 68Q34 23 74 18q40 3 34 49l-9-22q-18 12-50 3z"
+                />
+                <path
+                  fill="#3c2927"
+                  d="M43 52q-2 39 9 43l-4-28zM107 51q3 26-9 44l5-31z"
+                />
+                <circle fill="#16294d" cx="63" cy="65" r="2" />
+                <circle fill="#16294d" cx="87" cy="65" r="2" />
+                <path
+                  fill="none"
+                  stroke="#7a1f2b"
+                  stroke-width="2"
+                  d="M67 82q8 5 16 0"
+                />
+              </svg>
+              <div class="flag">
+                <i class="navy"></i><i class="gold"></i><i class="burg"></i
+                ><b>★</b>
+              </div>
+            </div>
+            <div class="fields">
+              <div class="field">
+                <div class="label">SURNAME</div>
+                <div class="value">ALDER</div>
+              </div>
+              <div class="field">
+                <div class="label">GIVEN NAMES</div>
+                <div class="value">MARA ELIN</div>
+              </div>
+              <div class="field">
+                <div class="label">NATIONALITY</div>
+                <div class="value">ALDERMERIAN</div>
+              </div>
+              <div class="field">
+                <div class="label">DATE OF BIRTH</div>
+                <div class="value">14 MAR 1998</div>
+              </div>
+              <div class="field">
+                <div class="label">PLACE OF BIRTH</div>
+                <div class="value">PORT MERIDIAN</div>
+              </div>
+              <div class="field">
+                <div class="label">SEX</div>
+                <div class="value">F</div>
+              </div>
+              <div class="field">
+                <div class="label">DATE OF ISSUE</div>
+                <div class="value">02 JAN 2026</div>
+              </div>
+              <div class="field">
+                <div class="label">DATE OF EXPIRY</div>
+                <div class="value">01 JAN 2036</div>
+              </div>
+              <div class="field">
+                <div class="label">DOCUMENT NO.</div>
+                <div class="value">ALD-2026-004821</div>
+              </div>
+            </div>
+          </div>
+          <div class="signature">
+            <div class="sig">Mara Elin Alder</div>
+            <div class="siglabel">HOLDER'S SIGNATURE</div>
+          </div>
+        </div>
+        <div class="mrz">
+          P&lt;ALDALDER&lt;&lt;MARA&lt;ELIN&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;<br />ALD2026004821ALM9803141F3601016&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;02
+        </div>
+      </section>
+      <div class="spine"></div>
+      <section class="page right">
+        <div class="content">
+          <div class="heading">VISAS · STAMPS · ENDORSEMENTS</div>
+          <div class="rule"></div>
+          <div class="big-arms">
+            <svg viewBox="0 0 240 140">
+              <path
+                fill="none"
+                stroke="#6b7d43"
+                stroke-width="3"
+                d="M36 112Q7 74 28 38M204 112q29-38 8-74M30 52l-12-10m15 24-16-2m175-22 12-10m-15 24 16-2"
+              />
+              <path
+                fill="#d4a437"
+                d="m120 3 8 14 16 2-12 11 3 16-15-8-15 8 3-16-12-11 16-2z"
+              />
+              <path
+                fill="#16294d"
+                stroke="#b9973f"
+                stroke-width="2"
+                d="M68 30h104v58c0 25-23 40-52 51-29-11-52-26-52-51z"
+              />
+              <path
+                fill="#7a1f2b"
+                d="M68 65h104v23c0 25-23 40-52 51-29-11-52-26-52-51z"
+              />
+              <path
+                fill="#d4a437"
+                d="M68 87q26-26 52 0 26-26 52 0v12q-26-26-52 0-26-26-52 0z"
+              />
+              <path
+                fill="#d4a437"
+                d="m120 39 5 10 11 1-8 8 2 11-10-5-10 5 2-11-8-8 11-1z"
+              />
+            </svg>
+            <div class="motto">PER MARE · PER ASTRA</div>
+          </div>
+          <div class="stamps">
+            <div class="stamp s1">
+              PORT MERIDIAN<br /><span>ENTRY · 14 MAR 2026</span>
+            </div>
+            <div class="stamp s2">
+              KASTELVAR<br /><span>ENTRY · 02 JUN 2026</span>
+            </div>
+            <div class="stamp s3">
+              HALDOR PASS<br /><span>ENTRY · 19 SEP 2026</span>
+            </div>
+          </div>
+          <div class="visa">
+            <svg viewBox="0 0 300 92">
+              <path
+                fill="none"
+                stroke="#16294d"
+                d="M-20 75Q80-20 320 75M-20 88Q90 5 320 88M-20 60Q90-35 320 60M40 110Q150-10 260 110M70 110Q150 15 230 110"
+              /></svg
+            ><strong>VISA — 90 DAYS · MULTIPLE ENTRY</strong
+            ><small>ISSUED PORT MERIDIAN · 02 JAN 2026</small>
+          </div>
+          <div class="lower">
+            <div class="mapbox">
+              <svg viewBox="0 0 170 100">
+                <path
+                  fill="#d3b978"
+                  stroke="#16294d"
+                  stroke-width="2"
+                  d="M18 67Q5 47 23 33l25-8 17-15 26 9 22-4 24 16-8 18-22 5-17 22-29-7zM138 72l9-5 8 6-6 9zM29 82l7-3 6 5-6 7z"
+                />
+                <circle fill="#7a1f2b" cx="83" cy="70" r="4" />
+                <text
+                  x="43"
+                  y="97"
+                  font-size="11"
+                  font-weight="bold"
+                  fill="#16294d"
+                >
+                  PORT MERIDIAN
+                </text>
+                <path stroke="#16294d" d="M145 17v18m-6-6 6-12 6 12m-12-2h12" />
+              </svg>
+              <div class="maplabel">THE REPUBLIC OF ALDERMERE</div>
+            </div>
+            <div class="foilbox">
+              <div class="foil">
+                <svg viewBox="0 0 50 50">
+                  <path
+                    fill="#16294d"
+                    d="m25 2 4 14 13-7-7 13 14 3-14 4 7 13-13-7-4 13-4-13-13 7 7-13-14-4 14-3-7-13 13 7z"
+                  />
+                </svg>
+              </div>
+              <div class="foil-label">SECURITY FOIL</div>
+            </div>
+          </div>
+          <div class="valid">
+            Valid for all countries · This passport remains the property of the
+            Republic of Aldermere
+          </div>
+        </div>
+      </section>
+    </main>
+    <section class="bottom">
+      <div class="facts">
+        <div class="fact"><strong>1911</strong><span>FOUNDED</span></div>
+        <div class="fact"><strong>412,000</strong><span>POPULATION</span></div>
+        <div class="fact">
+          <strong>PORT MERIDIAN</strong><span>CAPITAL</span>
+        </div>
+      </div>
+      <div class="footer">
+        Specimen — not a valid travel document · All names, places and numbers
+        are invented
+      </div>
+    </section>
+  </body>
+</html>
+<style>
+  .mrz {
+    font-size: 11px;
+    letter-spacing: 0;
+  }
+</style>
